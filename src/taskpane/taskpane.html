@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pptNoob</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #fff;
+        color: #333;
+      }
+      h1 { font-size: 1.4rem; margin-bottom: 16px; }
+      button {
+        padding: 8px 16px;
+        background: #0078d4;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+      button:hover { background: #106ebe; }
+      .actions { display: flex; flex-direction: column; gap: 10px; }
+      #status { margin-top: 16px; font-size: 0.85rem; color: #555; }
+    </style>
+  </head>
+  <body>
+    <h1>pptNoob</h1>
+    <div class="actions">
+      <button id="openFolderBtn">Open containing folder</button>
+    </div>
+    <p id="status"></p>
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  </body>
+</html>

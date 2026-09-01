@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp
+  xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+  xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
+  xsi:type="TaskPaneApp">
+
+  <Id>df24bb71-4a1d-42e8-8382-07c4677bc8de</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>pptNoob</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="pptNoob" />
+  <Description DefaultValue="Handy extras for PowerPoint." />
+  <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png" />
+  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-64.png" />
+  <SupportUrl DefaultValue="https://localhost:3000" />
+
+  <AppDomains>
+    <AppDomain>https://localhost:3000</AppDomain>
+  </AppDomains>
+
+  <Hosts>
+    <Host Name="Presentation" />
+  </Hosts>
+
+  <Requirements>
+    <Sets>
+      <Set Name="PowerPointApi" MinVersion="1.5" />
+    </Sets>
+  </Requirements>
+
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://localhost:3000/taskpane.html" />
+  </DefaultSettings>
+
+  <Permissions>ReadWriteDocument</Permissions>
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+
+    <Hosts>
+      <Host xsi:type="Presentation">
+
+        <DesktopFormFactor>
+          <GetStarted>
+            <Title resid="GetStarted.Title" />
+            <Description resid="GetStarted.Description" />
+            <LearnMoreUrl resid="GetStarted.LearnMoreUrl" />
+          </GetStarted>
+
+          <FunctionFile resid="Taskpane.Url" />
+
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <CustomTab id="pptNoob.Tab">
+              <Group id="pptNoob.Group">
+                <Label resid="Group.Label" />
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16x16" />
+                  <bt:Image size="32" resid="Icon.32x32" />
+                  <bt:Image size="80" resid="Icon.80x80" />
+                </Icon>
+
+                <Control xsi:type="Button" id="pptNoob.OpenFolderButton">
+                  <Label resid="OpenFolder.Label" />
+                  <Supertip>
+                    <Title resid="OpenFolder.Label" />
+                    <Description resid="OpenFolder.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16x16" />
+                    <bt:Image size="32" resid="Icon.32x32" />
+                    <bt:Image size="80" resid="Icon.80x80" />
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>openContainingFolder</FunctionName>
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Button" id="pptNoob.MarginPointOneButton">
+                  <Label resid="MarginPointOne.Label" />
+                  <Supertip>
+                    <Title resid="MarginPointOne.Label" />
+                    <Description resid="MarginPointOne.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16x16" />
+                    <bt:Image size="32" resid="Icon.32x32" />
+                    <bt:Image size="80" resid="Icon.80x80" />
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>setMarginsPointOneCm</FunctionName>
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Button" id="pptNoob.MarginZeroButton">
+                  <Label resid="MarginZero.Label" />
+                  <Supertip>
+                    <Title resid="MarginZero.Label" />
+                    <Description resid="MarginZero.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16x16" />
+                    <bt:Image size="32" resid="Icon.32x32" />
+                    <bt:Image size="80" resid="Icon.80x80" />
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>setMarginsZero</FunctionName>
+                  </Action>
+                </Control>
+
+              </Group>
+              <Label resid="Tab.Label" />
+            </CustomTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+
+      </Host>
+    </Hosts>
+
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon.16x16" DefaultValue="https://localhost:3000/assets/icon-16.png" />
+        <bt:Image id="Icon.32x32" DefaultValue="https://localhost:3000/assets/icon-32.png" />
+        <bt:Image id="Icon.80x80" DefaultValue="https://localhost:3000/assets/icon-80.png" />
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html" />
+        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?linkid=2123552" />
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="GetStarted.Title" DefaultValue="Get started with pptNoob" />
+        <bt:String id="Tab.Label" DefaultValue="pptNoob" />
+        <bt:String id="Group.Label" DefaultValue="Tools" />
+        <bt:String id="OpenFolder.Label" DefaultValue="Open Folder" />
+        <bt:String id="MarginPointOne.Label" DefaultValue="Margins 0.1 cm" />
+        <bt:String id="MarginZero.Label" DefaultValue="Margins 0 cm" />
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="GetStarted.Description" DefaultValue="Your pptNoob add-in loaded successfully. Go to the pptNoob tab to get started." />
+        <bt:String id="OpenFolder.Tooltip" DefaultValue="Opens the containing SharePoint or OneDrive folder in your browser." />
+        <bt:String id="MarginPointOne.Tooltip" DefaultValue="Sets every text margin on the selected shapes to 0.1 cm." />
+        <bt:String id="MarginZero.Tooltip" DefaultValue="Sets every text margin on the selected shapes to 0 cm." />
+      </bt:LongStrings>
+    </Resources>
+
+  </VersionOverrides>
+
+</OfficeApp>
