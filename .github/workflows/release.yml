@@ -1,0 +1,27 @@
+name: Publish macOS installer
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build installer
+        run: ./installer/build-pkg.sh "${GITHUB_REF_NAME#v}"
+
+      - name: Validate installer contents
+        run: pkgutil --payload-files "release/pptNoob-${GITHUB_REF_NAME#v}-macOS.pkg" | grep -Fxq './Library/Application Support/pptNoob/manifest.xml'
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" "release/pptNoob-${GITHUB_REF_NAME#v}-macOS.pkg" --generate-notes --title "pptNoob $GITHUB_REF_NAME"
