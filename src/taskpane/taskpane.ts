@@ -37,7 +37,7 @@ async function loadIcons(): Promise<void> {
     const response = await fetch("assets/phosphor/icon-index.json");
     if (!response.ok) throw new Error("Could not load the Phosphor icon index.");
     const index = await response.json() as IconIndex;
-    icons = Object.entries(index).flatMap(([weight, filenames]) => filenames.map((filename) => {
+    icons = Object.entries(index).reduce<IconDefinition[]>((allIcons, [weight, filenames]) => allIcons.concat(filenames.map((filename) => {
       const suffix = weight === "regular" ? "" : `-${weight}`;
       const slug = filename.slice(0, -4).replace(new RegExp(`${suffix}$`), "");
       return {
@@ -46,7 +46,7 @@ async function loadIcons(): Promise<void> {
         weight,
         path: `assets/phosphor/phosphor-icons/SVGs/${weight}/${filename}`,
       };
-    }));
+    })), []);
     renderIcons();
     const weightCount = Object.keys(index).length;
     const iconsPerWeight = Object.values(index)[0]?.length ?? 0;
@@ -190,6 +190,131 @@ function setMarginsZero(commandEvent: Office.AddinCommands.Event): Promise<void>
   return setSelectedShapeMargins(0, commandEvent);
 }
 
+type ShapeLayoutCommand =
+  | "alignLeft"
+  | "alignCenter"
+  | "alignRight"
+  | "alignTop"
+  | "alignMiddle"
+  | "alignBottom"
+  | "distributeHorizontally"
+  | "distributeVertically";
+
+async function layoutSelectedShapes(command: ShapeLayoutCommand, commandEvent: Office.AddinCommands.Event): Promise<void> {
+  try {
+    await PowerPoint.run(async (context) => {
+      const shapes = context.presentation.getSelectedShapes();
+      shapes.load("items/left,items/top,items/width,items/height");
+      await context.sync();
+
+      if (shapes.items.length < 2) return;
+
+      const left = Math.min(...shapes.items.map((shape) => shape.left));
+      const right = Math.max(...shapes.items.map((shape) => shape.left + shape.width));
+      const top = Math.min(...shapes.items.map((shape) => shape.top));
+      const bottom = Math.max(...shapes.items.map((shape) => shape.top + shape.height));
+
+      if (command === "alignLeft") {
+        shapes.items.forEach((shape) => { shape.left = left; });
+      } else if (command === "alignCenter") {
+        const center = (left + right) / 2;
+        shapes.items.forEach((shape) => { shape.left = center - shape.width / 2; });
+      } else if (command === "alignRight") {
+        shapes.items.forEach((shape) => { shape.left = right - shape.width; });
+      } else if (command === "alignTop") {
+        shapes.items.forEach((shape) => { shape.top = top; });
+      } else if (command === "alignMiddle") {
+        const middle = (top + bottom) / 2;
+        shapes.items.forEach((shape) => { shape.top = middle - shape.height / 2; });
+      } else if (command === "alignBottom") {
+        shapes.items.forEach((shape) => { shape.top = bottom - shape.height; });
+      } else if (shapes.items.length >= 3 && command === "distributeHorizontally") {
+        const orderedShapes = [...shapes.items].sort((first, second) => first.left - second.left);
+        const totalWidth = orderedShapes.reduce((sum, shape) => sum + shape.width, 0);
+        const gap = (right - left - totalWidth) / (orderedShapes.length - 1);
+        let nextLeft = left;
+        orderedShapes.forEach((shape) => {
+          shape.left = nextLeft;
+          nextLeft += shape.width + gap;
+        });
+      } else if (shapes.items.length >= 3 && command === "distributeVertically") {
+        const orderedShapes = [...shapes.items].sort((first, second) => first.top - second.top);
+        const totalHeight = orderedShapes.reduce((sum, shape) => sum + shape.height, 0);
+        const gap = (bottom - top - totalHeight) / (orderedShapes.length - 1);
+        let nextTop = top;
+        orderedShapes.forEach((shape) => {
+          shape.top = nextTop;
+          nextTop += shape.height + gap;
+        });
+      }
+
+      await context.sync();
+    });
+  } finally {
+    commandEvent.completed();
+  }
+}
+
+function alignLeft(commandEvent: Office.AddinCommands.Event): Promise<void> {
+  return layoutSelectedShapes("alignLeft", commandEvent);
+}
+
+function alignCenter(commandEvent: Office.AddinCommands.Event): Promise<void> {
+  return layoutSelectedShapes("alignCenter", commandEvent);
+}
+
+function alignRight(commandEvent: Office.AddinCommands.Event): Promise<void> {
+  return layoutSelectedShapes("alignRight", commandEvent);
+}
+
+function alignTop(commandEvent: Office.AddinCommands.Event): Promise<void> {
+  return layoutSelectedShapes("alignTop", commandEvent);
+}
+
+function alignMiddle(commandEvent: Office.AddinCommands.Event): Promise<void> {
+  return layoutSelectedShapes("alignMiddle", commandEvent);
+}
+
+function alignBottom(commandEvent: Office.AddinCommands.Event): Promise<void> {
+  return layoutSelectedShapes("alignBottom", commandEvent);
+}
+
+function distributeHorizontally(commandEvent: Office.AddinCommands.Event): Promise<void> {
+  return layoutSelectedShapes("distributeHorizontally", commandEvent);
+}
+
+function distributeVertically(commandEvent: Office.AddinCommands.Event): Promise<void> {
+  return layoutSelectedShapes("distributeVertically", commandEvent);
+}
+
+async function setSelectedShapesZOrder(position: PowerPoint.ShapeZOrder, commandEvent: Office.AddinCommands.Event): Promise<void> {
+  try {
+    await PowerPoint.run(async (context) => {
+      const shapes = context.presentation.getSelectedShapes();
+      shapes.load("items/zOrderPosition");
+      await context.sync();
+
+      const orderedShapes = [...shapes.items].sort((first, second) =>
+        position === PowerPoint.ShapeZOrder.bringToFront
+          ? first.zOrderPosition - second.zOrderPosition
+          : second.zOrderPosition - first.zOrderPosition,
+      );
+      orderedShapes.forEach((shape) => shape.setZOrder(position));
+      await context.sync();
+    });
+  } finally {
+    commandEvent.completed();
+  }
+}
+
+function bringToFront(commandEvent: Office.AddinCommands.Event): Promise<void> {
+  return setSelectedShapesZOrder(PowerPoint.ShapeZOrder.bringToFront, commandEvent);
+}
+
+function sendToBack(commandEvent: Office.AddinCommands.Event): Promise<void> {
+  return setSelectedShapesZOrder(PowerPoint.ShapeZOrder.sendToBack, commandEvent);
+}
+
 function openInfo(commandEvent: Office.AddinCommands.Event): void {
   const infoUrl = new URL("info.html", window.location.href).toString();
   Office.context.ui.displayDialogAsync(infoUrl, { height: 55, width: 35 }, (result) => {
@@ -200,5 +325,19 @@ function openInfo(commandEvent: Office.AddinCommands.Event): void {
   });
 }
 
-Object.assign(globalThis, { openInfo, setMarginsPointOneCm, setMarginsZero });
+Object.assign(globalThis, {
+  alignBottom,
+  alignCenter,
+  alignLeft,
+  alignMiddle,
+  alignRight,
+  alignTop,
+  bringToFront,
+  distributeHorizontally,
+  distributeVertically,
+  openInfo,
+  sendToBack,
+  setMarginsPointOneCm,
+  setMarginsZero,
+});
 

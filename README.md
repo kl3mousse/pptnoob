@@ -4,6 +4,8 @@ A tiny PowerPoint add-in for macOS users who are stuck working with PowerPoint o
 
 This project is intentionally small and practical: it adds a few quick actions to the PowerPoint ribbon so everyday annoyances are easier to handle without fighting the default UI.
 
+![The pptNoob ribbon in PowerPoint](assets/pptNoob-screenshot.png)
+
 ## Why this exists
 
 PowerPoint on Mac can be surprisingly limited compared with the Windows experience. Sometimes the missing option is tiny, but it keeps showing up every time you work on a deck.
@@ -16,6 +18,7 @@ This add-in is a gentle workaround for that reality: a few helpful shortcuts for
 - Search, recolor, and insert the full Phosphor icon library in six weights
 - Set selected text margins to 0.1 cm
 - Set selected text margins to 0 cm
+- Align, distribute, and reorder selected shapes
 - View add-in information, source, license, and credits
 
 ## Install on your Mac
@@ -73,11 +76,11 @@ This workflow deploys it to GitHub Pages automatically on pushes to `main`
 Update the version in `package.json`, then create and push a matching tag:
 
 ```bash
-git tag v1.1.0
-git push origin v1.1.0
+git tag v1.2.0
+git push origin v1.2.0
 ```
 
-GitHub Actions builds `pptNoob-1.1.0-macOS.pkg` and publishes it on the repository's Releases page.
+GitHub Actions builds `pptNoob-1.2.0-macOS.pkg` and publishes it on the repository's Releases page.
 
 ## Notes
 

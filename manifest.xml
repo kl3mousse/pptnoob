@@ -7,7 +7,7 @@
   xsi:type="TaskPaneApp">
 
   <Id>df24bb71-4a1d-42e8-8382-07c4677bc8de</Id>
-  <Version>1.1.0.0</Version>
+  <Version>1.2.0.0</Version>
   <ProviderName>pptNoob</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="pptNoob" />
@@ -137,6 +137,175 @@
 
               </Group>
 
+              <Group id="pptNoob.AlignmentGroup">
+                <Label resid="AlignmentGroup.Label" />
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16x16" />
+                  <bt:Image size="32" resid="Icon.32x32" />
+                  <bt:Image size="80" resid="Icon.80x80" />
+                </Icon>
+
+                <Control xsi:type="Button" id="pptNoob.AlignLeftButton">
+                  <Label resid="AlignmentButton.Label" />
+                  <Supertip>
+                    <Title resid="AlignLeft.Title" />
+                    <Description resid="AlignLeft.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="AlignLeftIcon.16x16" />
+                    <bt:Image size="32" resid="AlignLeftIcon.32x32" />
+                    <bt:Image size="80" resid="AlignLeftIcon.80x80" />
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>alignLeft</FunctionName>
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Button" id="pptNoob.AlignCenterButton">
+                  <Label resid="AlignmentButton.Label" />
+                  <Supertip>
+                    <Title resid="AlignCenter.Title" />
+                    <Description resid="AlignCenter.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="AlignCenterIcon.16x16" />
+                    <bt:Image size="32" resid="AlignCenterIcon.32x32" />
+                    <bt:Image size="80" resid="AlignCenterIcon.80x80" />
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>alignCenter</FunctionName>
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Button" id="pptNoob.AlignRightButton">
+                  <Label resid="AlignmentButton.Label" />
+                  <Supertip>
+                    <Title resid="AlignRight.Title" />
+                    <Description resid="AlignRight.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="AlignRightIcon.16x16" />
+                    <bt:Image size="32" resid="AlignRightIcon.32x32" />
+                    <bt:Image size="80" resid="AlignRightIcon.80x80" />
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>alignRight</FunctionName>
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Button" id="pptNoob.AlignTopButton">
+                  <Label resid="AlignmentButton.Label" />
+                  <Supertip>
+                    <Title resid="AlignTop.Title" />
+                    <Description resid="AlignTop.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="AlignTopIcon.16x16" />
+                    <bt:Image size="32" resid="AlignTopIcon.32x32" />
+                    <bt:Image size="80" resid="AlignTopIcon.80x80" />
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>alignTop</FunctionName>
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Button" id="pptNoob.AlignMiddleButton">
+                  <Label resid="AlignmentButton.Label" />
+                  <Supertip>
+                    <Title resid="AlignMiddle.Title" />
+                    <Description resid="AlignMiddle.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="AlignMiddleIcon.16x16" />
+                    <bt:Image size="32" resid="AlignMiddleIcon.32x32" />
+                    <bt:Image size="80" resid="AlignMiddleIcon.80x80" />
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>alignMiddle</FunctionName>
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Button" id="pptNoob.AlignBottomButton">
+                  <Label resid="AlignmentButton.Label" />
+                  <Supertip>
+                    <Title resid="AlignBottom.Title" />
+                    <Description resid="AlignBottom.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="AlignBottomIcon.16x16" />
+                    <bt:Image size="32" resid="AlignBottomIcon.32x32" />
+                    <bt:Image size="80" resid="AlignBottomIcon.80x80" />
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>alignBottom</FunctionName>
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Button" id="pptNoob.DistributeHorizontallyButton">
+                  <Label resid="AlignmentButton.Label" />
+                  <Supertip>
+                    <Title resid="DistributeHorizontally.Title" />
+                    <Description resid="DistributeHorizontally.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="DistributeHorizontallyIcon.16x16" />
+                    <bt:Image size="32" resid="DistributeHorizontallyIcon.32x32" />
+                    <bt:Image size="80" resid="DistributeHorizontallyIcon.80x80" />
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>distributeHorizontally</FunctionName>
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Button" id="pptNoob.DistributeVerticallyButton">
+                  <Label resid="AlignmentButton.Label" />
+                  <Supertip>
+                    <Title resid="DistributeVertically.Title" />
+                    <Description resid="DistributeVertically.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="DistributeVerticallyIcon.16x16" />
+                    <bt:Image size="32" resid="DistributeVerticallyIcon.32x32" />
+                    <bt:Image size="80" resid="DistributeVerticallyIcon.80x80" />
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>distributeVertically</FunctionName>
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Button" id="pptNoob.BringToFrontButton">
+                  <Label resid="AlignmentButton.Label" />
+                  <Supertip>
+                    <Title resid="BringToFront.Title" />
+                    <Description resid="BringToFront.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="BringToFrontIcon.16x16" />
+                    <bt:Image size="32" resid="BringToFrontIcon.32x32" />
+                    <bt:Image size="80" resid="BringToFrontIcon.80x80" />
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>bringToFront</FunctionName>
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Button" id="pptNoob.SendToBackButton">
+                  <Label resid="AlignmentButton.Label" />
+                  <Supertip>
+                    <Title resid="SendToBack.Title" />
+                    <Description resid="SendToBack.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="SendToBackIcon.16x16" />
+                    <bt:Image size="32" resid="SendToBackIcon.32x32" />
+                    <bt:Image size="80" resid="SendToBackIcon.80x80" />
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>sendToBack</FunctionName>
+                  </Action>
+                </Control>
+              </Group>
+
               <Group id="pptNoob.AboutGroup">
                 <Label resid="AboutGroup.Label" />
                 <Icon>
@@ -187,6 +356,36 @@
         <bt:Image id="InfoIcon.16x16" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/info-duotone-ribbon-16.png" />
         <bt:Image id="InfoIcon.32x32" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/info-duotone-ribbon-32.png" />
         <bt:Image id="InfoIcon.80x80" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/info-duotone-ribbon-80.png" />
+        <bt:Image id="AlignLeftIcon.16x16" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/align-left-ribbon-16.png" />
+        <bt:Image id="AlignLeftIcon.32x32" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/align-left-ribbon-32.png" />
+        <bt:Image id="AlignLeftIcon.80x80" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/align-left-ribbon-80.png" />
+        <bt:Image id="AlignCenterIcon.16x16" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/align-center-ribbon-16.png" />
+        <bt:Image id="AlignCenterIcon.32x32" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/align-center-ribbon-32.png" />
+        <bt:Image id="AlignCenterIcon.80x80" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/align-center-ribbon-80.png" />
+        <bt:Image id="AlignRightIcon.16x16" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/align-right-ribbon-16.png" />
+        <bt:Image id="AlignRightIcon.32x32" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/align-right-ribbon-32.png" />
+        <bt:Image id="AlignRightIcon.80x80" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/align-right-ribbon-80.png" />
+        <bt:Image id="AlignTopIcon.16x16" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/align-top-ribbon-16.png" />
+        <bt:Image id="AlignTopIcon.32x32" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/align-top-ribbon-32.png" />
+        <bt:Image id="AlignTopIcon.80x80" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/align-top-ribbon-80.png" />
+        <bt:Image id="AlignMiddleIcon.16x16" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/align-middle-ribbon-16.png" />
+        <bt:Image id="AlignMiddleIcon.32x32" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/align-middle-ribbon-32.png" />
+        <bt:Image id="AlignMiddleIcon.80x80" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/align-middle-ribbon-80.png" />
+        <bt:Image id="AlignBottomIcon.16x16" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/align-bottom-ribbon-16.png" />
+        <bt:Image id="AlignBottomIcon.32x32" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/align-bottom-ribbon-32.png" />
+        <bt:Image id="AlignBottomIcon.80x80" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/align-bottom-ribbon-80.png" />
+        <bt:Image id="DistributeHorizontallyIcon.16x16" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/distribute-horizontal-ribbon-16.png" />
+        <bt:Image id="DistributeHorizontallyIcon.32x32" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/distribute-horizontal-ribbon-32.png" />
+        <bt:Image id="DistributeHorizontallyIcon.80x80" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/distribute-horizontal-ribbon-80.png" />
+        <bt:Image id="DistributeVerticallyIcon.16x16" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/distribute-vertical-ribbon-16.png" />
+        <bt:Image id="DistributeVerticallyIcon.32x32" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/distribute-vertical-ribbon-32.png" />
+        <bt:Image id="DistributeVerticallyIcon.80x80" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/distribute-vertical-ribbon-80.png" />
+        <bt:Image id="BringToFrontIcon.16x16" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/bring-to-front-ribbon-16.png" />
+        <bt:Image id="BringToFrontIcon.32x32" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/bring-to-front-ribbon-32.png" />
+        <bt:Image id="BringToFrontIcon.80x80" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/bring-to-front-ribbon-80.png" />
+        <bt:Image id="SendToBackIcon.16x16" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/send-to-back-ribbon-16.png" />
+        <bt:Image id="SendToBackIcon.32x32" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/send-to-back-ribbon-32.png" />
+        <bt:Image id="SendToBackIcon.80x80" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/send-to-back-ribbon-80.png" />
       </bt:Images>
       <bt:Urls>
         <bt:Url id="Taskpane.Url" DefaultValue="https://kl3mousse.github.io/pptnoob/taskpane.html" />
@@ -197,12 +396,24 @@
         <bt:String id="Tab.Label" DefaultValue="pptNoob" />
         <bt:String id="PrimaryGroup.Label" DefaultValue="Tools" />
         <bt:String id="MarginsGroup.Label" DefaultValue="Margins" />
+        <bt:String id="AlignmentGroup.Label" DefaultValue="Align" />
+        <bt:String id="AlignmentButton.Label" DefaultValue="&#8203;" />
         <bt:String id="AboutGroup.Label" DefaultValue="About" />
         <bt:String id="OpenFolder.Label" DefaultValue="🔍 Containing Folder" />
         <bt:String id="IconPicker.Label" DefaultValue="Phosphor Icons" />
         <bt:String id="MarginPointOne.Label" DefaultValue="Margins 0.1 cm" />
         <bt:String id="MarginZero.Label" DefaultValue="Margins 0 cm" />
         <bt:String id="Info.Label" DefaultValue="Info" />
+        <bt:String id="AlignLeft.Title" DefaultValue="Align to Left" />
+        <bt:String id="AlignCenter.Title" DefaultValue="Align to Centre" />
+        <bt:String id="AlignRight.Title" DefaultValue="Align to Right" />
+        <bt:String id="AlignTop.Title" DefaultValue="Align to Top" />
+        <bt:String id="AlignMiddle.Title" DefaultValue="Align to Middle" />
+        <bt:String id="AlignBottom.Title" DefaultValue="Align to Bottom" />
+        <bt:String id="DistributeHorizontally.Title" DefaultValue="Distribute Horizontally" />
+        <bt:String id="DistributeVertically.Title" DefaultValue="Distribute Vertically" />
+        <bt:String id="BringToFront.Title" DefaultValue="Bring to Front" />
+        <bt:String id="SendToBack.Title" DefaultValue="Send to Back" />
       </bt:ShortStrings>
       <bt:LongStrings>
         <bt:String id="GetStarted.Description" DefaultValue="Your pptNoob add-in loaded successfully. Go to the pptNoob tab to get started." />
@@ -211,6 +422,16 @@
         <bt:String id="MarginPointOne.Tooltip" DefaultValue="Sets every text margin on the selected shapes to 0.1 cm." />
         <bt:String id="MarginZero.Tooltip" DefaultValue="Sets every text margin on the selected shapes to 0 cm." />
         <bt:String id="Info.Tooltip" DefaultValue="Shows information, source, license, and credits for pptNoob." />
+        <bt:String id="AlignLeft.Tooltip" DefaultValue="Aligns the selected shapes to the left edge." />
+        <bt:String id="AlignCenter.Tooltip" DefaultValue="Aligns the selected shapes to the horizontal centre." />
+        <bt:String id="AlignRight.Tooltip" DefaultValue="Aligns the selected shapes to the right edge." />
+        <bt:String id="AlignTop.Tooltip" DefaultValue="Aligns the selected shapes to the top edge." />
+        <bt:String id="AlignMiddle.Tooltip" DefaultValue="Aligns the selected shapes to the vertical middle." />
+        <bt:String id="AlignBottom.Tooltip" DefaultValue="Aligns the selected shapes to the bottom edge." />
+        <bt:String id="DistributeHorizontally.Tooltip" DefaultValue="Distributes three or more selected shapes horizontally." />
+        <bt:String id="DistributeVertically.Tooltip" DefaultValue="Distributes three or more selected shapes vertically." />
+        <bt:String id="BringToFront.Tooltip" DefaultValue="Brings the selected shapes in front of all other shapes." />
+        <bt:String id="SendToBack.Tooltip" DefaultValue="Sends the selected shapes behind all other shapes." />
       </bt:LongStrings>
     </Resources>
 

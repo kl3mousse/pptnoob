@@ -1,6 +1,6 @@
 {
   "name": "pptnoob",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "PowerPoint task pane add-in",
   "scripts": {
     "build": "webpack --mode production",
