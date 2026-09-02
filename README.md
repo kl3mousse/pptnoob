@@ -49,7 +49,13 @@ npm install
 npm start
 ```
 
-This starts the local Office add-in debugging flow for PowerPoint on macOS and serves the app locally while you test the manifest.
+`npm start` generates a separate development manifest, starts the local HTTPS server, and opens PowerPoint with the development add-in. Look for the `pptNoob Dev` tab in the ribbon; the regular `pptNoob` tab is the installed production version.
+
+- Changes to task pane HTML, TypeScript, or assets are rebuilt by the development server. Reload or reopen the task pane to see them.
+- Changes to ribbon buttons are defined by the manifest. Run `npm stop`, quit PowerPoint, then run `npm start` again to reload them.
+- Local changes are served from `https://localhost:3000` and do not affect GitHub Pages or other users.
+
+If PowerPoint keeps an older development ribbon after restarting, run `npm stop`, delete `8e9a9f52-1d97-4cf4-82d7-3099777a0f91.manifest.xml` from `~/Library/Containers/com.microsoft.Powerpoint/Data/Documents/wef/`, and run `npm start` again. Do not delete `pptNoob.xml`; that is the installed production add-in.
 
 ## GitHub Pages deployment
 

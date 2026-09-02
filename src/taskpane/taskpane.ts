@@ -1,8 +1,78 @@
 /// <reference types="office-js" />
 
+interface IconDefinition {
+  name: string;
+  keywords: string[];
+  path: string;
+}
+
+const icons: IconDefinition[] = [
+  {
+    name: "Microsoft PowerPoint",
+    keywords: ["microsoft", "office", "powerpoint", "presentation", "slides"],
+    path: "assets/phosphor/microsoft-powerpoint-logo.svg",
+  },
+];
+
 Office.onReady(() => {
   document.getElementById("openFolderBtn")!.addEventListener("click", () => openContainingFolder());
+  document.getElementById("iconSearch")!.addEventListener("input", renderIcons);
+  renderIcons();
 });
+
+function setStatus(message: string): void {
+  const status = document.getElementById("status");
+  if (status) status.textContent = message;
+}
+
+function renderIcons(): void {
+  const query = (document.getElementById("iconSearch") as HTMLInputElement).value.trim().toLowerCase();
+  const grid = document.getElementById("iconGrid")!;
+  const empty = document.getElementById("emptyIcons")!;
+  const matches = icons.filter((icon) => [icon.name, ...icon.keywords].some((value) => value.toLowerCase().includes(query)));
+
+  grid.replaceChildren(...matches.map(createIconButton));
+  empty.hidden = matches.length > 0;
+}
+
+function createIconButton(icon: IconDefinition): HTMLButtonElement {
+  const button = document.createElement("button");
+  const image = document.createElement("img");
+  const label = document.createElement("span");
+
+  button.type = "button";
+  button.className = "icon-button";
+  button.title = `Insert ${icon.name}`;
+  image.src = icon.path;
+  image.alt = "";
+  label.textContent = icon.name;
+  button.append(image, label);
+  button.addEventListener("click", () => insertIcon(icon));
+  return button;
+}
+
+async function insertIcon(icon: IconDefinition): Promise<void> {
+  try {
+    setStatus(`Inserting ${icon.name}...`);
+    const response = await fetch(icon.path);
+    if (!response.ok) throw new Error(`Could not load ${icon.name}.`);
+
+    const color = (document.getElementById("iconColor") as HTMLInputElement).value;
+    const svg = (await response.text()).replace(/currentColor/g, color);
+    await new Promise<void>((resolve, reject) => {
+      Office.context.document.setSelectedDataAsync(
+        svg,
+        { coercionType: Office.CoercionType.XmlSvg },
+        (result) => result.status === Office.AsyncResultStatus.Succeeded
+          ? resolve()
+          : reject(new Error(result.error.message)),
+      );
+    });
+    setStatus(`Inserted ${icon.name}.`);
+  } catch (error: unknown) {
+    setStatus(error instanceof Error ? error.message : String(error));
+  }
+}
 
 function getFileUrl(): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -17,8 +87,6 @@ function getFileUrl(): Promise<string> {
 }
 
 async function openContainingFolder(commandEvent?: Office.AddinCommands.Event): Promise<void> {
-  const status = document.getElementById("status");
-
   try {
     const fileUrl = await getFileUrl();
     if (!fileUrl) {
@@ -34,9 +102,9 @@ async function openContainingFolder(commandEvent?: Office.AddinCommands.Event): 
     url.search = "";
     url.hash = "";
     Office.context.ui.openBrowserWindow(url.toString());
-    if (status) status.textContent = "Opened the containing folder in your browser.";
+    setStatus("Opened the containing folder in your browser.");
   } catch (error: unknown) {
-    if (status) status.textContent = error instanceof Error ? error.message : String(error);
+    setStatus(error instanceof Error ? error.message : String(error));
   } finally {
     commandEvent?.completed();
   }

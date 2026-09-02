@@ -76,6 +76,23 @@
                   </Action>
                 </Control>
 
+                <Control xsi:type="Button" id="pptNoob.IconPickerButton">
+                  <Label resid="IconPicker.Label" />
+                  <Supertip>
+                    <Title resid="IconPicker.Label" />
+                    <Description resid="IconPicker.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16x16" />
+                    <bt:Image size="32" resid="Icon.32x32" />
+                    <bt:Image size="80" resid="Icon.80x80" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>ButtonId1</TaskpaneId>
+                    <SourceLocation resid="Taskpane.Url" />
+                  </Action>
+                </Control>
+
                 <Control xsi:type="Button" id="pptNoob.MarginPointOneButton">
                   <Label resid="MarginPointOne.Label" />
                   <Supertip>
@@ -132,12 +149,14 @@
         <bt:String id="Tab.Label" DefaultValue="pptNoob" />
         <bt:String id="Group.Label" DefaultValue="Tools" />
         <bt:String id="OpenFolder.Label" DefaultValue="Open Folder" />
+        <bt:String id="IconPicker.Label" DefaultValue="Icons" />
         <bt:String id="MarginPointOne.Label" DefaultValue="Margins 0.1 cm" />
         <bt:String id="MarginZero.Label" DefaultValue="Margins 0 cm" />
       </bt:ShortStrings>
       <bt:LongStrings>
         <bt:String id="GetStarted.Description" DefaultValue="Your pptNoob add-in loaded successfully. Go to the pptNoob tab to get started." />
         <bt:String id="OpenFolder.Tooltip" DefaultValue="Opens the containing SharePoint or OneDrive folder in your browser." />
+        <bt:String id="IconPicker.Tooltip" DefaultValue="Opens the Phosphor icon picker." />
         <bt:String id="MarginPointOne.Tooltip" DefaultValue="Sets every text margin on the selected shapes to 0.1 cm." />
         <bt:String id="MarginZero.Tooltip" DefaultValue="Sets every text margin on the selected shapes to 0 cm." />
       </bt:LongStrings>
