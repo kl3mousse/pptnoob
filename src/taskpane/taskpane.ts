@@ -2,37 +2,87 @@
 
 interface IconDefinition {
   name: string;
-  keywords: string[];
+  slug: string;
+  weight: string;
   path: string;
 }
 
-const icons: IconDefinition[] = [
-  {
-    name: "Microsoft PowerPoint",
-    keywords: ["microsoft", "office", "powerpoint", "presentation", "slides"],
-    path: "assets/phosphor/microsoft-powerpoint-logo.svg",
-  },
-];
+type IconIndex = Record<string, string[]>;
+
+const pageSize = 60;
+let icons: IconDefinition[] = [];
+let visibleIconCount = pageSize;
 
 Office.onReady(() => {
-  document.getElementById("openFolderBtn")!.addEventListener("click", () => openContainingFolder());
-  document.getElementById("iconSearch")!.addEventListener("input", renderIcons);
-  renderIcons();
+  disableAutomaticTaskPane();
+  document.getElementById("iconSearch")!.addEventListener("input", resetIconResults);
+  document.getElementById("iconWeight")!.addEventListener("change", resetIconResults);
+  document.getElementById("showMoreIcons")!.addEventListener("click", showMoreIcons);
+  loadIcons();
 });
+
+function disableAutomaticTaskPane(): void {
+  Office.context.document.settings.set("Office.AutoShowTaskpaneWithDocument", false);
+  Office.context.document.settings.saveAsync();
+}
 
 function setStatus(message: string): void {
   const status = document.getElementById("status");
   if (status) status.textContent = message;
 }
 
-function renderIcons(): void {
+async function loadIcons(): Promise<void> {
+  try {
+    setStatus("Loading Phosphor icons...");
+    const response = await fetch("assets/phosphor/icon-index.json");
+    if (!response.ok) throw new Error("Could not load the Phosphor icon index.");
+    const index = await response.json() as IconIndex;
+    icons = Object.entries(index).flatMap(([weight, filenames]) => filenames.map((filename) => {
+      const suffix = weight === "regular" ? "" : `-${weight}`;
+      const slug = filename.slice(0, -4).replace(new RegExp(`${suffix}$`), "");
+      return {
+        name: slug.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" "),
+        slug,
+        weight,
+        path: `assets/phosphor/phosphor-icons/SVGs/${weight}/${filename}`,
+      };
+    }));
+    renderIcons();
+    const weightCount = Object.keys(index).length;
+    const iconsPerWeight = Object.values(index)[0]?.length ?? 0;
+    setStatus(`${iconsPerWeight.toLocaleString()} Phosphor icons available in ${weightCount} weights.`);
+  } catch (error: unknown) {
+    setStatus(error instanceof Error ? error.message : String(error));
+  }
+}
+
+function resetIconResults(): void {
+  visibleIconCount = pageSize;
+  renderIcons();
+}
+
+function getMatchingIcons(): IconDefinition[] {
   const query = (document.getElementById("iconSearch") as HTMLInputElement).value.trim().toLowerCase();
+  const weight = (document.getElementById("iconWeight") as HTMLSelectElement).value;
+  return icons.filter((icon) => icon.weight === weight && icon.slug.includes(query));
+}
+
+function renderIcons(): void {
+  const matches = getMatchingIcons();
   const grid = document.getElementById("iconGrid")!;
   const empty = document.getElementById("emptyIcons")!;
-  const matches = icons.filter((icon) => [icon.name, ...icon.keywords].some((value) => value.toLowerCase().includes(query)));
+  const showMore = document.getElementById("showMoreIcons") as HTMLButtonElement;
+  const resultCount = document.getElementById("iconResultCount")!;
 
-  grid.replaceChildren(...matches.map(createIconButton));
+  grid.replaceChildren(...matches.slice(0, visibleIconCount).map(createIconButton));
   empty.hidden = matches.length > 0;
+  showMore.hidden = matches.length <= visibleIconCount;
+  resultCount.textContent = `${Math.min(matches.length, visibleIconCount).toLocaleString()} of ${matches.length.toLocaleString()}`;
+}
+
+function showMoreIcons(): void {
+  visibleIconCount += pageSize;
+  renderIcons();
 }
 
 function createIconButton(icon: IconDefinition): HTMLButtonElement {

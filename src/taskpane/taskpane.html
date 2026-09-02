@@ -19,7 +19,6 @@
         background: #fff;
         color: #242424;
       }
-      h1 { font-size: 1.35rem; margin: 0 0 18px; }
       h2 { font-size: 1rem; margin: 0; }
       button {
         padding: 8px 16px;
@@ -31,20 +30,20 @@
         font-size: 0.9rem;
       }
       button:hover { background: var(--accent-hover); }
-      .actions { display: flex; flex-direction: column; gap: 10px; }
-      .section { margin-top: 24px; }
+      .section { margin-top: 0; }
       .picker-toolbar {
         display: grid;
-        grid-template-columns: 1fr 36px;
+        grid-template-columns: minmax(0, 1fr) auto 36px;
         gap: 8px;
         margin: 12px 0;
       }
-      #iconSearch {
+      #iconSearch, #iconWeight {
         min-width: 0;
         padding: 8px 10px;
         border: 1px solid var(--border);
         border-radius: 4px;
         font: inherit;
+        background: #fff;
       }
       #iconColor {
         width: 36px;
@@ -75,23 +74,40 @@
       .icon-button:hover { background: #f7f7f7; border-color: #aaa; }
       .icon-button img { width: 36px; height: 36px; }
       .icon-button span { font-size: 0.75rem; line-height: 1.2; }
+      .results-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 10px;
+      }
+      #iconResultCount { color: var(--muted); font-size: 0.8rem; }
+      #showMoreIcons { padding: 6px 10px; }
       #emptyIcons { color: var(--muted); font-size: 0.85rem; }
       #status { margin-top: 16px; font-size: 0.85rem; color: var(--muted); }
     </style>
   </head>
   <body>
-    <h1>pptNoob</h1>
-    <div class="actions">
-      <button id="openFolderBtn">Open containing folder</button>
-    </div>
     <section class="section" aria-labelledby="iconsHeading">
-      <h2 id="iconsHeading">Insert icon</h2>
+      <h2 id="iconsHeading">Phosphor Icon library</h2>
       <div class="picker-toolbar">
         <input id="iconSearch" type="search" placeholder="Search icons" aria-label="Search icons" />
+        <select id="iconWeight" aria-label="Icon weight">
+          <option value="thin">Thin</option>
+          <option value="light">Light</option>
+          <option value="regular" selected>Regular</option>
+          <option value="bold">Bold</option>
+          <option value="fill">Fill</option>
+          <option value="duotone">Duotone</option>
+        </select>
         <input id="iconColor" type="color" value="#242424" aria-label="Icon color" title="Icon color" />
       </div>
       <div id="iconGrid" class="icon-grid"></div>
       <p id="emptyIcons" hidden>No matching icons.</p>
+      <div class="results-footer">
+        <span id="iconResultCount"></span>
+        <button id="showMoreIcons" type="button" hidden>Show more</button>
+      </div>
     </section>
     <p id="status" role="status" aria-live="polite"></p>
     <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>

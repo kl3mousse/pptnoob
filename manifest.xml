@@ -52,8 +52,8 @@
 
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
             <CustomTab id="pptNoob.Tab">
-              <Group id="pptNoob.Group">
-                <Label resid="Group.Label" />
+              <Group id="pptNoob.PrimaryGroup">
+                <Label resid="PrimaryGroup.Label" />
                 <Icon>
                   <bt:Image size="16" resid="Icon.16x16" />
                   <bt:Image size="32" resid="Icon.32x32" />
@@ -67,9 +67,9 @@
                     <Description resid="OpenFolder.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="Icon.16x16" />
-                    <bt:Image size="32" resid="Icon.32x32" />
-                    <bt:Image size="80" resid="Icon.80x80" />
+                    <bt:Image size="16" resid="FolderIcon.16x16" />
+                    <bt:Image size="32" resid="FolderIcon.32x32" />
+                    <bt:Image size="80" resid="FolderIcon.80x80" />
                   </Icon>
                   <Action xsi:type="ExecuteFunction">
                     <FunctionName>openContainingFolder</FunctionName>
@@ -83,15 +83,25 @@
                     <Description resid="IconPicker.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="Icon.16x16" />
-                    <bt:Image size="32" resid="Icon.32x32" />
-                    <bt:Image size="80" resid="Icon.80x80" />
+                    <bt:Image size="16" resid="PhosphorIcon.16x16" />
+                    <bt:Image size="32" resid="PhosphorIcon.32x32" />
+                    <bt:Image size="80" resid="PhosphorIcon.80x80" />
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>ButtonId1</TaskpaneId>
                     <SourceLocation resid="Taskpane.Url" />
                   </Action>
                 </Control>
+
+              </Group>
+
+              <Group id="pptNoob.MarginsGroup">
+                <Label resid="MarginsGroup.Label" />
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16x16" />
+                  <bt:Image size="32" resid="Icon.32x32" />
+                  <bt:Image size="80" resid="Icon.80x80" />
+                </Icon>
 
                 <Control xsi:type="Button" id="pptNoob.MarginPointOneButton">
                   <Label resid="MarginPointOne.Label" />
@@ -100,9 +110,9 @@
                     <Description resid="MarginPointOne.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="Icon.16x16" />
-                    <bt:Image size="32" resid="Icon.32x32" />
-                    <bt:Image size="80" resid="Icon.80x80" />
+                    <bt:Image size="16" resid="MarginIcon.16x16" />
+                    <bt:Image size="32" resid="MarginIcon.32x32" />
+                    <bt:Image size="80" resid="MarginIcon.80x80" />
                   </Icon>
                   <Action xsi:type="ExecuteFunction">
                     <FunctionName>setMarginsPointOneCm</FunctionName>
@@ -116,9 +126,9 @@
                     <Description resid="MarginZero.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="Icon.16x16" />
-                    <bt:Image size="32" resid="Icon.32x32" />
-                    <bt:Image size="80" resid="Icon.80x80" />
+                    <bt:Image size="16" resid="MarginIcon.16x16" />
+                    <bt:Image size="32" resid="MarginIcon.32x32" />
+                    <bt:Image size="80" resid="MarginIcon.80x80" />
                   </Icon>
                   <Action xsi:type="ExecuteFunction">
                     <FunctionName>setMarginsZero</FunctionName>
@@ -139,6 +149,15 @@
         <bt:Image id="Icon.16x16" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/icon-16.png" />
         <bt:Image id="Icon.32x32" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/icon-32.png" />
         <bt:Image id="Icon.80x80" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/icon-80.png" />
+        <bt:Image id="PhosphorIcon.16x16" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/phosphor-ribbon-16.png" />
+        <bt:Image id="PhosphorIcon.32x32" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/phosphor-ribbon-32.png" />
+        <bt:Image id="PhosphorIcon.80x80" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/phosphor-ribbon-80.png" />
+        <bt:Image id="FolderIcon.16x16" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/folder-simple-dashed-ribbon-16.png" />
+        <bt:Image id="FolderIcon.32x32" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/folder-simple-dashed-ribbon-32.png" />
+        <bt:Image id="FolderIcon.80x80" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/folder-simple-dashed-ribbon-80.png" />
+        <bt:Image id="MarginIcon.16x16" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/frame-corners-duotone-ribbon-16.png" />
+        <bt:Image id="MarginIcon.32x32" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/frame-corners-duotone-ribbon-32.png" />
+        <bt:Image id="MarginIcon.80x80" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/frame-corners-duotone-ribbon-80.png" />
       </bt:Images>
       <bt:Urls>
         <bt:Url id="Taskpane.Url" DefaultValue="https://kl3mousse.github.io/pptnoob/taskpane.html" />
@@ -147,9 +166,10 @@
       <bt:ShortStrings>
         <bt:String id="GetStarted.Title" DefaultValue="Get started with pptNoob" />
         <bt:String id="Tab.Label" DefaultValue="pptNoob" />
-        <bt:String id="Group.Label" DefaultValue="Tools" />
-        <bt:String id="OpenFolder.Label" DefaultValue="Open Folder" />
-        <bt:String id="IconPicker.Label" DefaultValue="Icons" />
+        <bt:String id="PrimaryGroup.Label" DefaultValue="Tools" />
+        <bt:String id="MarginsGroup.Label" DefaultValue="Margins" />
+        <bt:String id="OpenFolder.Label" DefaultValue="🔍 Containing Folder" />
+        <bt:String id="IconPicker.Label" DefaultValue="Phosphor Icons" />
         <bt:String id="MarginPointOne.Label" DefaultValue="Margins 0.1 cm" />
         <bt:String id="MarginZero.Label" DefaultValue="Margins 0 cm" />
       </bt:ShortStrings>

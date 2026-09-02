@@ -13,6 +13,7 @@ This add-in is a gentle workaround for that reality: a few helpful shortcuts for
 ## Current features
 
 - Open the containing folder for the current presentation in the browser
+- Search, recolor, and insert the full Phosphor icon library in six weights
 - Set selected text margins to 0.1 cm
 - Set selected text margins to 0 cm
 
