@@ -16,6 +16,7 @@ This add-in is a gentle workaround for that reality: a few helpful shortcuts for
 - Search, recolor, and insert the full Phosphor icon library in six weights
 - Set selected text margins to 0.1 cm
 - Set selected text margins to 0 cm
+- View add-in information, source, license, and credits
 
 ## Install on your Mac
 
@@ -72,11 +73,11 @@ This workflow deploys it to GitHub Pages automatically on pushes to `main`
 Update the version in `package.json`, then create and push a matching tag:
 
 ```bash
-git tag v1.0.0
-git push origin v1.0.0
+git tag v1.1.0
+git push origin v1.1.0
 ```
 
-GitHub Actions builds `pptNoob-1.0.0-macOS.pkg` and publishes it on the repository's Releases page.
+GitHub Actions builds `pptNoob-1.1.0-macOS.pkg` and publishes it on the repository's Releases page.
 
 ## Notes
 

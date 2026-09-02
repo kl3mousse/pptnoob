@@ -58,6 +58,11 @@ module.exports = async (env, options) => {
         template: "./src/taskpane/taskpane.html",
         chunks: ["taskpane"],
       }),
+      new HtmlWebpackPlugin({
+        filename: "info.html",
+        template: "./src/info/info.html",
+        inject: false,
+      }),
       new CopyWebpackPlugin({
         patterns: [{ from: "assets", to: "assets" }],
       }),

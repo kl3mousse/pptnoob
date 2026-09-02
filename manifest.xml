@@ -7,7 +7,7 @@
   xsi:type="TaskPaneApp">
 
   <Id>df24bb71-4a1d-42e8-8382-07c4677bc8de</Id>
-  <Version>1.0.0.0</Version>
+  <Version>1.1.0.0</Version>
   <ProviderName>pptNoob</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="pptNoob" />
@@ -136,6 +136,32 @@
                 </Control>
 
               </Group>
+
+              <Group id="pptNoob.AboutGroup">
+                <Label resid="AboutGroup.Label" />
+                <Icon>
+                  <bt:Image size="16" resid="InfoIcon.16x16" />
+                  <bt:Image size="32" resid="InfoIcon.32x32" />
+                  <bt:Image size="80" resid="InfoIcon.80x80" />
+                </Icon>
+
+                <Control xsi:type="Button" id="pptNoob.InfoButton">
+                  <Label resid="Info.Label" />
+                  <Supertip>
+                    <Title resid="Info.Label" />
+                    <Description resid="Info.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="InfoIcon.16x16" />
+                    <bt:Image size="32" resid="InfoIcon.32x32" />
+                    <bt:Image size="80" resid="InfoIcon.80x80" />
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>openInfo</FunctionName>
+                  </Action>
+                </Control>
+
+              </Group>
               <Label resid="Tab.Label" />
             </CustomTab>
           </ExtensionPoint>
@@ -158,6 +184,9 @@
         <bt:Image id="MarginIcon.16x16" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/frame-corners-duotone-ribbon-16.png" />
         <bt:Image id="MarginIcon.32x32" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/frame-corners-duotone-ribbon-32.png" />
         <bt:Image id="MarginIcon.80x80" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/frame-corners-duotone-ribbon-80.png" />
+        <bt:Image id="InfoIcon.16x16" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/info-duotone-ribbon-16.png" />
+        <bt:Image id="InfoIcon.32x32" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/info-duotone-ribbon-32.png" />
+        <bt:Image id="InfoIcon.80x80" DefaultValue="https://kl3mousse.github.io/pptnoob/assets/info-duotone-ribbon-80.png" />
       </bt:Images>
       <bt:Urls>
         <bt:Url id="Taskpane.Url" DefaultValue="https://kl3mousse.github.io/pptnoob/taskpane.html" />
@@ -168,10 +197,12 @@
         <bt:String id="Tab.Label" DefaultValue="pptNoob" />
         <bt:String id="PrimaryGroup.Label" DefaultValue="Tools" />
         <bt:String id="MarginsGroup.Label" DefaultValue="Margins" />
+        <bt:String id="AboutGroup.Label" DefaultValue="About" />
         <bt:String id="OpenFolder.Label" DefaultValue="🔍 Containing Folder" />
         <bt:String id="IconPicker.Label" DefaultValue="Phosphor Icons" />
         <bt:String id="MarginPointOne.Label" DefaultValue="Margins 0.1 cm" />
         <bt:String id="MarginZero.Label" DefaultValue="Margins 0 cm" />
+        <bt:String id="Info.Label" DefaultValue="Info" />
       </bt:ShortStrings>
       <bt:LongStrings>
         <bt:String id="GetStarted.Description" DefaultValue="Your pptNoob add-in loaded successfully. Go to the pptNoob tab to get started." />
@@ -179,6 +210,7 @@
         <bt:String id="IconPicker.Tooltip" DefaultValue="Opens the Phosphor icon picker." />
         <bt:String id="MarginPointOne.Tooltip" DefaultValue="Sets every text margin on the selected shapes to 0.1 cm." />
         <bt:String id="MarginZero.Tooltip" DefaultValue="Sets every text margin on the selected shapes to 0 cm." />
+        <bt:String id="Info.Tooltip" DefaultValue="Shows information, source, license, and credits for pptNoob." />
       </bt:LongStrings>
     </Resources>
 

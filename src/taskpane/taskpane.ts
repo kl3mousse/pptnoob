@@ -190,5 +190,15 @@ function setMarginsZero(commandEvent: Office.AddinCommands.Event): Promise<void>
   return setSelectedShapeMargins(0, commandEvent);
 }
 
-Object.assign(globalThis, { setMarginsPointOneCm, setMarginsZero });
+function openInfo(commandEvent: Office.AddinCommands.Event): void {
+  const infoUrl = new URL("info.html", window.location.href).toString();
+  Office.context.ui.displayDialogAsync(infoUrl, { height: 55, width: 35 }, (result) => {
+    if (result.status === Office.AsyncResultStatus.Failed) {
+      setStatus(`Could not open add-in information: ${result.error.message}`);
+    }
+    commandEvent.completed();
+  });
+}
+
+Object.assign(globalThis, { openInfo, setMarginsPointOneCm, setMarginsZero });
 

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About pptNoob</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --accent: #d24726;
+        --accent-soft: #fff2ed;
+        --border: #e2dedc;
+        --muted: #66605d;
+        --text: #24211f;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        padding: 28px;
+        background: linear-gradient(145deg, #fff 0%, #fff8f5 100%);
+        color: var(--text);
+        font-family: Aptos, "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+      main { max-width: 560px; margin: 0 auto; }
+      header {
+        display: grid;
+        grid-template-columns: 52px minmax(0, 1fr);
+        gap: 14px;
+        align-items: center;
+        padding-bottom: 22px;
+        border-bottom: 1px solid var(--border);
+      }
+      header img {
+        width: 52px;
+        height: 52px;
+        padding: 8px;
+        border-radius: 8px;
+        background: var(--accent-soft);
+      }
+      h1 { margin: 0; font-size: 1.65rem; letter-spacing: 0; }
+      .tagline { margin: 2px 0 0; color: var(--muted); }
+      .intro { margin: 22px 0; font-size: 1.02rem; }
+      dl {
+        display: grid;
+        grid-template-columns: 80px minmax(0, 1fr);
+        gap: 10px 16px;
+        margin: 0;
+        padding: 18px 0;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+      dt { color: var(--muted); font-weight: 600; }
+      dd { margin: 0; }
+      a { color: #9f321c; font-weight: 600; text-underline-offset: 3px; }
+      a:hover { color: var(--accent); }
+      .credits { margin: 20px 0 0; color: var(--muted); }
+      .credits strong { color: var(--text); }
+      @media (max-width: 420px) {
+        body { padding: 20px; }
+        dl { grid-template-columns: 1fr; gap: 2px; }
+        dd + dt { margin-top: 8px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <img src="assets/icon-80.png" alt="" />
+        <div>
+          <h1>pptNoob</h1>
+          <p class="tagline">Handy extras for PowerPoint on Mac.</p>
+        </div>
+      </header>
+
+      <p class="intro">
+        A tiny, practical add-in that puts a few missing PowerPoint actions close at hand, so everyday deck work takes less friction.
+      </p>
+
+      <dl>
+        <dt>Source</dt>
+        <dd><a href="https://github.com/kl3mousse/pptnoob" target="_blank" rel="noopener noreferrer">github.com/kl3mousse/pptnoob</a></dd>
+        <dt>License</dt>
+        <dd>ISC License</dd>
+      </dl>
+
+      <p class="credits">
+        <strong>Icons by Phosphor.</strong> Many thanks to the Phosphor team for making such a thoughtful, flexible icon family available to everyone. Explore it at <a href="https://phosphoricons.com" target="_blank" rel="noopener noreferrer">phosphoricons.com</a>.
+      </p>
+    </main>
+  </body>
+</html>
