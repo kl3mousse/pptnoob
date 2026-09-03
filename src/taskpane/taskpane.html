@@ -7,57 +7,292 @@
     <style>
       :root {
         color-scheme: light;
-        --accent: #d24726;
-        --accent-hover: #b83a1f;
-        --border: #dedede;
-        --muted: #666;
+        --bg: #f5f5f6;
+        --surface: #ffffff;
+        --surface-hover: #fafafa;
+        --surface-active: #f1f1f1;
+        --text: #242424;
+        --text-muted: #6f6f6f;
+        --text-subtle: #929292;
+        --border: #e4e4e4;
+        --border-strong: #d2d2d2;
+        --accent: #d9482b;
+        --accent-hover: #c63d23;
+        --accent-soft: #f8e9e4;
+        --accent-text: #713224;
+        --text-on-accent: #ffffff;
+        --danger: #b42318;
+        --danger-soft: #fff1f0;
+        --success: #498205;
+        --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.1);
+        --shadow-menu: 0 8px 24px rgba(0, 0, 0, 0.14);
+        --radius-sm: 4px;
+        --radius-md: 7px;
+        --radius-lg: 8px;
+        --space-xs: 4px;
+        --space-sm: 8px;
+        --space-md: 12px;
+        --space-lg: 16px;
+      }
+      [data-theme="dark"] {
+        color-scheme: dark;
+        --bg: #1f1f1f;
+        --surface: #292929;
+        --surface-hover: #333333;
+        --surface-active: #3a3a3a;
+        --text: #f3f3f3;
+        --text-muted: #b8b8b8;
+        --text-subtle: #8f8f8f;
+        --border: #3d3d3d;
+        --border-strong: #505050;
+        --accent-soft: #54281f;
+        --accent-text: #ffc8b8;
+        --danger-soft: #4a201d;
+        --shadow-menu: 0 8px 24px rgba(0, 0, 0, 0.4);
       }
       body {
-        font-family: Aptos, "Segoe UI", sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         margin: 0;
-        padding: 18px;
-        background: #fff;
-        color: #242424;
+        padding: var(--space-md);
+        background: var(--bg);
+        color: var(--text);
+        font-size: 14px;
       }
-      h2 { font-size: 1rem; margin: 0; }
+      h2 { margin: 0; font-size: 1rem; font-weight: 600; }
       button {
-        padding: 8px 16px;
-        background: var(--accent);
-        color: #fff;
-        border: none;
-        border-radius: 4px;
         cursor: pointer;
-        font-size: 0.9rem;
+        font: inherit;
       }
-      button:hover { background: var(--accent-hover); }
+      button:disabled { cursor: default; opacity: 0.42; }
+      button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .surface { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); }
+      .btn {
+        min-height: 30px;
+        padding: 5px 10px;
+        color: var(--text);
+        background: var(--surface);
+        border: 1px solid var(--border-strong);
+        border-radius: var(--radius-sm);
+        font-weight: 500;
+      }
+      .btn:hover { background: var(--surface-hover); }
+      .btn:active { background: var(--surface-active); }
+      .btn-sm { min-height: 28px; padding: 4px 8px; font-size: 0.75rem; }
+      .btn-primary { color: var(--text-on-accent); background: var(--accent); border-color: var(--accent); }
+      .btn-primary:hover { background: var(--accent-hover); }
+      .btn-ghost { background: transparent; border-color: transparent; }
+      .btn-danger { color: var(--danger); background: var(--danger-soft); border-color: transparent; }
+      .btn-link { min-height: auto; padding: 2px; background: transparent; border-color: transparent; }
+      .btn-danger-text { color: var(--danger); }
+      .control {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        min-height: 32px;
+        padding: 6px 8px;
+        color: var(--text);
+        background: var(--surface);
+        border: 1px solid var(--border-strong);
+        border-radius: var(--radius-sm);
+        font: inherit;
+      }
+      .control:hover { border-color: var(--text-subtle); }
+      .control-compact { min-height: 30px; font-size: 0.8rem; }
       .section { margin-top: 0; }
+      .pane-tabs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2px;
+        margin-bottom: var(--space-md);
+        padding: 3px;
+        background: var(--surface-active);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+      }
+      .pane-tab {
+        padding: 7px 10px;
+        color: var(--text-muted);
+        background: transparent;
+        border: 0;
+        border-radius: var(--radius-sm);
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+      .pane-tab:hover { color: var(--text); background: var(--surface-hover); }
+      .pane-tab.active { color: var(--text); background: var(--surface); box-shadow: var(--shadow-subtle); }
+      .favorites-toolbar {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: center;
+        gap: var(--space-sm);
+      }
+      #addCurrentFavorite {
+        padding-inline: 6px;
+        color: var(--text-muted);
+        font-size: 0.75rem;
+        text-align: left;
+        white-space: nowrap;
+      }
+      #addCurrentFavorite.is-favorited { color: var(--text-subtle); }
+      .favorites-toolbar { margin-bottom: var(--space-sm); }
+      .favorite-card {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 30px;
+        align-items: center;
+        min-height: 60px;
+        margin-bottom: 3px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        transition: border-color 120ms ease, background 120ms ease;
+      }
+      .favorite-card:hover { background: var(--surface-hover); border-color: var(--border-strong); }
+      .favorite-main {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        height: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        justify-content: center;
+        padding: 5px var(--space-xs) 5px 10px;
+        color: var(--text);
+        background: transparent;
+        border: none;
+        border-radius: var(--radius-md) 0 0 var(--radius-md);
+        text-align: left;
+      }
+      .favorite-main:hover { background: transparent; }
+      .favorite-main:active { background: var(--surface-active); }
+      .favorite-main strong {
+        display: -webkit-box;
+        min-width: 0;
+        overflow: hidden;
+        font-size: 0.82rem;
+        line-height: 1.28;
+        overflow-wrap: anywhere;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+      }
+      .favorite-note {
+        max-width: 100%;
+        margin-bottom: 2px;
+        padding: 1px 4px;
+        overflow: hidden;
+        color: var(--accent-text);
+        background: var(--accent-soft);
+        border-radius: var(--radius-sm);
+        font-size: 0.62rem;
+        font-weight: 500;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .favorite-location {
+        max-width: 100%;
+        margin-top: 2px;
+        color: var(--text-muted);
+        font-size: 0.66rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .action-menu { position: relative; margin-right: var(--space-xs); }
+      .action-menu summary { list-style: none; }
+      .action-menu summary::-webkit-details-marker { display: none; }
+      .icon-action {
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        box-sizing: border-box;
+        color: var(--text-muted);
+        background: transparent;
+        border: 1px solid transparent;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        font-size: 1.1rem;
+        line-height: 1;
+      }
+      .icon-action:hover, .action-menu[open] .icon-action { color: var(--text); background: var(--surface-active); border-color: var(--border); }
+      .action-menu-items {
+        position: absolute;
+        top: calc(100% + var(--space-xs));
+        right: 0;
+        z-index: 5;
+        display: grid;
+        width: min(190px, calc(100vw - 40px));
+        padding: var(--space-xs);
+        background: var(--surface);
+        border: 1px solid var(--border-strong);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-menu);
+      }
+      .action-menu-item {
+        min-height: 32px;
+        padding: 5px var(--space-sm);
+        color: var(--text);
+        background: transparent;
+        border: 0;
+        border-radius: var(--radius-sm);
+        text-align: left;
+        font-size: 0.78rem;
+      }
+      .action-menu-item:hover { background: var(--surface-hover); }
+      .action-menu-item:last-child { color: var(--danger); }
+      .favorite-edit { display: grid; grid-column: 1 / -1; gap: var(--space-sm); padding: var(--space-md); }
+      .favorite-edit h3 { margin: 0 0 2px; font-size: 0.88rem; }
+      .favorite-field { display: grid; gap: 3px; color: var(--text-muted); font-size: 0.72rem; font-weight: 600; }
+      .favorite-field input { color: var(--text); font-size: 0.82rem; font-weight: 400; }
+      .favorite-form-location {
+        padding: 3px 0;
+        overflow: hidden;
+        color: var(--text-muted);
+        font-size: 0.75rem;
+        font-weight: 400;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .favorite-form-actions, .favorite-remove-area {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: var(--space-sm);
+      }
+      .favorite-remove-area {
+        min-height: 28px;
+        padding-top: 4px;
+        border-top: 1px solid var(--border);
+        color: var(--text-muted);
+        font-size: 0.72rem;
+      }
+      #emptyFavorites { color: var(--text-muted); font-size: 0.82rem; }
       .picker-toolbar {
         display: grid;
         grid-template-columns: minmax(0, 1fr) auto 36px;
-        gap: 8px;
-        margin: 12px 0;
+        gap: var(--space-sm);
+        margin: var(--space-md) 0;
       }
       #iconSearch, #iconWeight {
         min-width: 0;
-        padding: 8px 10px;
-        border: 1px solid var(--border);
-        border-radius: 4px;
-        font: inherit;
-        background: #fff;
       }
       #iconColor {
         width: 36px;
         height: 36px;
         padding: 3px;
-        border: 1px solid var(--border);
-        border-radius: 4px;
-        background: #fff;
+        border: 1px solid var(--border-strong);
+        border-radius: var(--radius-sm);
+        background: var(--surface);
         cursor: pointer;
       }
       .icon-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
-        gap: 8px;
+        gap: var(--space-sm);
       }
       .icon-button {
         min-height: 92px;
@@ -65,34 +300,63 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 8px;
+        gap: var(--space-sm);
         padding: 10px 6px;
-        background: #fff;
-        color: #242424;
+        background: var(--surface);
+        color: var(--text);
         border: 1px solid var(--border);
+        border-radius: var(--radius-md);
       }
-      .icon-button:hover { background: #f7f7f7; border-color: #aaa; }
+      .icon-button:hover { background: var(--surface-hover); border-color: var(--border-strong); }
       .icon-button img { width: 36px; height: 36px; }
       .icon-button span { font-size: 0.75rem; line-height: 1.2; }
       .results-footer {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 12px;
-        margin-top: 10px;
+        gap: var(--space-md);
+        margin-top: var(--space-sm);
       }
-      #iconResultCount { color: var(--muted); font-size: 0.8rem; }
-      #showMoreIcons { padding: 6px 10px; }
-      #emptyIcons { color: var(--muted); font-size: 0.85rem; }
-      #status { margin-top: 16px; font-size: 0.85rem; color: var(--muted); }
+      #iconResultCount { color: var(--text-muted); font-size: 0.8rem; }
+      #emptyIcons { color: var(--text-muted); font-size: 0.85rem; }
+      #status:empty { display: none; }
+      #status { margin-top: var(--space-lg); font-size: 0.8rem; color: var(--text-muted); }
+      #status.status-toast {
+        position: fixed;
+        right: 12px;
+        bottom: 12px;
+        z-index: 10;
+        max-width: calc(100% - 24px);
+        box-sizing: border-box;
+        margin: 0;
+        padding: 7px 10px;
+        color: var(--text);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--success);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-menu);
+      }
     </style>
   </head>
   <body>
-    <section class="section" aria-labelledby="iconsHeading">
+    <nav class="pane-tabs" role="tablist" aria-label="Task pane pages">
+      <button class="pane-tab active" type="button" role="tab" aria-selected="true" data-pane-target="favorites">Favorites</button>
+      <button class="pane-tab" type="button" role="tab" aria-selected="false" data-pane-target="icons">Icons</button>
+    </nav>
+    <section class="section" data-pane="favorites" aria-label="Favorites">
+      <div class="favorites-toolbar">
+        <button id="addCurrentFavorite" class="btn btn-ghost btn-sm" type="button">☆ Add current deck</button>
+        <input id="favoriteSearch" class="control control-compact" type="search" placeholder="Search favorites" aria-label="Search favorites" />
+      </div>
+      <div id="favoritesList"></div>
+      <p id="emptyFavorites">No favorites yet.</p>
+    </section>
+    <section class="section" data-pane="icons" aria-labelledby="iconsHeading" hidden>
       <h2 id="iconsHeading">Phosphor Icon library</h2>
       <div class="picker-toolbar">
-        <input id="iconSearch" type="search" placeholder="Search icons" aria-label="Search icons" />
-        <select id="iconWeight" aria-label="Icon weight">
+        <input id="iconSearch" class="control" type="search" placeholder="Search icons" aria-label="Search icons" />
+        <select id="iconWeight" class="control" aria-label="Icon weight">
           <option value="thin">Thin</option>
           <option value="light">Light</option>
           <option value="regular" selected>Regular</option>
@@ -106,7 +370,7 @@
       <p id="emptyIcons" hidden>No matching icons.</p>
       <div class="results-footer">
         <span id="iconResultCount"></span>
-        <button id="showMoreIcons" type="button" hidden>Show more</button>
+        <button id="showMoreIcons" class="btn btn-secondary btn-sm" type="button" hidden>Show more</button>
       </div>
     </section>
     <p id="status" role="status" aria-live="polite"></p>

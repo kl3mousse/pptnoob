@@ -1,9 +1,10 @@
 {
   "name": "pptnoob",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "PowerPoint task pane add-in",
   "scripts": {
     "build": "webpack --mode production",
+    "test": "tsc -p tests/tsconfig.json && node --test .test-dist/tests/**/*.test.js",
     "dev-server": "webpack serve --mode development",
     "prepare-dev-manifest": "node scripts/create-dev-manifest.js",
     "prestart": "npm run prepare-dev-manifest",
@@ -15,6 +16,7 @@
   },
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^26.4.0",
     "@types/office-js": "^1.0.608",
     "copy-webpack-plugin": "^14.0.0",
     "gh-pages": "^6.3.0",

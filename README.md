@@ -14,6 +14,7 @@ This add-in is a gentle workaround for that reality: a few helpful shortcuts for
 
 ## Current features
 
+- Add, search, edit, reorder, and open favorite presentations
 - Open the containing folder for the current presentation in the browser
 - Search, recolor, and insert the full Phosphor icon library in six weights
 - Set selected text margins to 0.1 cm
@@ -51,6 +52,7 @@ Version tags also trigger `.github/workflows/release.yml`, which builds the macO
 
 ```bash
 npm install
+npm test
 npm start
 ```
 
@@ -73,14 +75,17 @@ This workflow deploys it to GitHub Pages automatically on pushes to `main`
 
 ## Publishing an installer
 
-Update the version in `package.json`, then create and push a matching tag:
+Update the versions in `package.json` and `manifest.xml`, validate the release, then create and push a matching tag:
 
 ```bash
-git tag v1.2.0
-git push origin v1.2.0
+npm test
+npm run build
+npx office-addin-manifest validate manifest.xml
+git tag v1.3.0
+git push origin v1.3.0
 ```
 
-GitHub Actions builds `pptNoob-1.2.0-macOS.pkg` and publishes it on the repository's Releases page.
+GitHub Actions builds `pptNoob-1.3.0-macOS.pkg` and publishes it on the repository's Releases page.
 
 ## Notes
 

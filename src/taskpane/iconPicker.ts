@@ -3,7 +3,7 @@ import {
   insertPhosphorIcon,
   loadPhosphorIcons,
 } from "../icons/phosphor";
-import { setStatus } from "../ui/status";
+import { setStatus, showStatusToast } from "../ui/status";
 
 const pageSize = 60;
 
@@ -60,7 +60,7 @@ async function insertIcon(icon: IconDefinition): Promise<void> {
     setStatus(`Inserting ${icon.name}...`);
     const color = (document.getElementById("iconColor") as HTMLInputElement).value;
     await insertPhosphorIcon(icon, color);
-    setStatus(`Inserted ${icon.name}.`);
+    showStatusToast(`✓ Inserted ${icon.name}`);
   } catch (error: unknown) {
     setStatus(error instanceof Error ? error.message : String(error));
   }
@@ -72,7 +72,7 @@ async function loadIcons(): Promise<void> {
     const library = await loadPhosphorIcons();
     icons = library.icons;
     renderIcons();
-    setStatus(`${library.iconsPerWeight.toLocaleString()} Phosphor icons available in ${library.weightCount} weights.`);
+    showStatusToast(`${library.iconsPerWeight.toLocaleString()} Phosphor icons available`);
   } catch (error: unknown) {
     setStatus(error instanceof Error ? error.message : String(error));
   }
